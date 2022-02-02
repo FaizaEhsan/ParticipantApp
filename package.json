@@ -1,0 +1,53 @@
+{
+  "name": "participantapp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.17",
+    "@react-native-community/clipboard": "^1.5.1",
+    "@react-native-community/push-notification-ios": "^1.10.1",
+    "@react-navigation/drawer": "^6.2.0",
+    "@react-navigation/native": "^6.0.7",
+    "@react-navigation/stack": "^6.1.0",
+    "@twotalltotems/react-native-otp-input": "^1.3.11",
+    "axios": "^0.25.0",
+    "galio-framework": "^0.8.0",
+    "react": "17.0.2",
+    "react-native": "0.65.1",
+    "react-native-document-picker": "^8.0.0",
+    "react-native-elements": "^3.4.2",
+    "react-native-gesture-handler": "^2.2.0",
+    "react-native-paper": "^4.11.2",
+    "react-native-popup-menu": "^0.15.12",
+    "react-native-push-notification": "^8.1.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.2",
+    "react-native-vector-icons": "^9.0.0",
+    "react-navigation-stack": "^2.10.4",
+    "react-redux": "^7.2.6",
+    "redux-thunk": "^2.4.1",
+    "rn-pendo-sdk": "^2.13.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.5.1",
+    "jest": "^25.5.4",
+    "jest-dom": "^4.0.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "nock": "^13.0.7",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

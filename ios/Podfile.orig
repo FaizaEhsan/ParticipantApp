@@ -1,0 +1,40 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '11.0'
+
+target 'participantapp' do
+  config = use_native_modules!
+
+  use_react_native!(:path => config["reactNativePath"])
+
+  target 'participantappTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work and
+  # you should disable these next few lines.
+<<<<<<< HEAD
+  #use_flipper!({ 'Flipper-Folly' => '2.3.0' }) # update this part
+  #post_install do |installer|
+    #flipper_post_install(installer)
+  #end
+=======
+  use_flipper!({ 'Flipper' => '0.74.0' })
+  post_install do |installer|
+    flipper_post_install(installer)
+  end
+>>>>>>> 409a8cdb4e0657396ec6d8ac50a8be2d8eb731ab
+end
+
+target 'participantapp-tvOS' do
+  # Pods for participantapp-tvOS
+
+  target 'participantapp-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
