@@ -4,7 +4,9 @@ import { StyleSheet, View, Dimensions, TouchableWithoutFeedback, Keyboard, Keybo
 import { useDispatch } from 'react-redux';
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-
+import TextInputComp from '../../Components/TextInput';
+import TextInputPasswordComp from '../../Components/TextInputPassword';
+import ButtonComp from '../../Components/Button';
 import { registerUser } from '../../../apis/Authenticate';
 import { registerUserData } from '../../../redux/Actions/index';
 import { argonTheme } from '../../../constants';
@@ -146,46 +148,34 @@ function Registration (prop) {
             >
               Enter an email address and password to create your account.
             </Text>
-            <TextInput
-              onChangeText={emailAddress => { setEmailAddress(emailAddress); }}
-              label='Email address'
-              underlineColor={emailError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
-              value={emailAddress}
-              style={emailError ? styles.TextInputStyleEmailWithError : styles.TextInputStyleEmail}
-              theme={{
-                colors: {
-                  primary: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
-                  placeholder: emailError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.TEXT
-                }
-              }}
-            />
+
+            <TextInputComp 
+                value={emailAddress}  
+                onChangeText={emailAddress => setEmailAddress(emailAddress)}  
+                label='Email' 
+                underlineColor={emailError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
+                style={emailError ? styles.TextInputStyleEmailWithError : styles.TextInputStyleEmail}
+                theme={{
+                  colors: {
+                    primary: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
+                    placeholder: emailError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.TEXT
+                  }
+                }}
+                />
+            
             {!!emailError && (
               <Text style={styles.errorText}>{emailError}</Text>
             )}
-            <TextInput
-              onChangeText={password => setPassword(password)}
-              maxLength={15}
-              secureTextEntry={hidePassword}
-              underlineColor={passwordError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
-              label='Password'
-              value={password}
-              style={passwordError ? styles.TextInputStylePasswordError : styles.TextInputStylePassword}
-              right={showPassword
-                ? <TextInput.Icon
-                    color='#798286'
-                    name='eye'
-                    forceTextInputFocus={false}
-                    onPress={() => onIconPasswordPress()}
-                  />
-                : null}
-              theme={{
-                colors: {
-                  primary: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
-                  placeholder: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.TEXT,
-                  underlineColor: 'transparent'
-                }
-              }}
-            />
+
+
+            <TextInputPasswordComp   
+                value={password} 
+                onChangeText={password => setPassword(password)}  
+                
+                underlineColor={passwordError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
+                label='Password' 
+                />
+            
             {/* {!!passwordError && (
               <Text style={styles.errorText}>{passwordError}</Text>
             )} */}
@@ -194,49 +184,33 @@ function Registration (prop) {
             >
               Password should have at least 8 characters and 1 special character.
             </Text>
-            <TextInput
-              onChangeText={reEnterPassword => setReEnterPassword(reEnterPassword)}
-              maxLength={15}
-              value={reEnterPassword}
-              secureTextEntry={hidereEnterPassword}
+
+            <TextInputPasswordComp  
+             theme={{
+              colors: {
+                primary: passwordMatchError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
+                placeholder: passwordMatchError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.TEXT
+              }
+            }}
+              value={reEnterPassword}  
+              onChangeText={reEnterPassword => setReEnterPassword(reEnterPassword)} 
+              label='Re-enter password' 
               underlineColor={passwordMatchError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
-              label='Re-enter password'
               style={passwordMatchError ? styles.TextInputStylePasswordError : styles.TextInputStylePassword}
-              right={showRePassword
-                ? <TextInput.Icon
-                    color='#798286'
-                    name='eye'
-                    forceTextInputFocus={false}
-                    onPress={() => onIconReEnterPasswordPress()}
-                  />
-                : null}
-              theme={{
-                colors: {
-                  primary: passwordMatchError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
-                  placeholder: passwordMatchError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.TEXT
-                }
-              }}
-            />
+              />
+           
             {!!passwordMatchError && (
               <Text style={styles.errorText}>{passwordMatchError}</Text>
             )}
-            <Button
-              mode='contained'
-              color={buttonDisable ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED}
-              disabled={buttonDisable}
-              style={{ marginTop: keyboardStatus === 'True' ? '5%' : '10%' }}
-              contentStyle={styles.ContentStyle}
-              labelStyle={{ fontFamily: 'Inter-Regular' }}
-              uppercase={false}
-              onPress={() => onRegisterClick()}
-            >
-              <Text
-                size={15}
-                color={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
-              >
-                Create Account
-              </Text>
-            </Button>
+
+
+
+              <ButtonComp
+                value={buttonDisable} 
+                onPress={() => onRegisterClick()} title="Create Account"
+                style={{ marginTop: keyboardStatus === 'True' ? '5%' : '10%' }}
+                />
+            
           </View>
         </ScrollView>
       </DismissKeyboard>

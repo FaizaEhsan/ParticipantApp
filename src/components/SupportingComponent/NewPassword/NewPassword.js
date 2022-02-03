@@ -3,10 +3,9 @@ import { View, StyleSheet, Dimensions, Platform, KeyboardAvoidingView, Keyboard,
 import { Text, theme } from 'galio-framework';
 import { argonTheme } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
-import { Button, TextInput } from 'react-native-paper';
-import { useSelector } from 'react-redux';
 import Logo from '../Logo/Logo';
-
+import TextInputPasswordComp from '../../Components/TextInputPassword';
+import ButtonComp from '../../Components/Button';
 const { height } = Dimensions.get('screen');
 
 function NewPassword () {
@@ -14,32 +13,11 @@ function NewPassword () {
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [hidePassword, setHidePassword] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
-  const [passwordMatchError, setPasswordMatchError] = useState('');
-  const [reEnterPassword, setReEnterPassword] = useState('');
+   const [reEnterPassword, setReEnterPassword] = useState('');
   const [hidereEnterPassword, setHidereEnterPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(false);
 
-  // const setTimelineData = useSelector((state) => state.setTimelineData);
-
-  //   useEffect(() => {
-  //     if (Object.keys(emailAddress).length > 0) {
-  //       if (emailAddress !== '' && regEmail.test(emailAddress)) {
-  //         setDisabled(false);
-  //       } else {
-  //         setDisabled(true);
-  //       }
-  //     }
-  //   }, [emailAddress]);
-
-  //   console.log('emailAddress', emailAddress);
-
-  //   const onSendEmail = () => {
-  //     if (emailAddress !== '') {
-  //       navigation.navigate('EmailSentScreen');
-  //     }
-  //   };
+ 
 
   useEffect(() => {
     console.log('length', password.length)
@@ -69,24 +47,12 @@ function NewPassword () {
   }, [reEnterPassword]);
 
   const onSavePasswordPress = async () => {
-    console.log('length on button click', password.length)
-    // const data =
-    // {
-    //   password: password
-    // };
+    
     if (password !== '' && password.length >= 8 && disabled === false) {
-    //   try {
-    //     const status = await registerUser(data);
-    //     console.log('----------status', status);
-    //   } catch (error) {
-    //     console.log('----------error', error);
-    //   }
-    //   dispatch(registerUserData(data));
+   
       setPassword('');
       navigation.navigate('LoginScreen');
-    } else {
-      console.log('-----error cant Register user-------');
-    }
+    } 
     if (password.trim() === '') {
       setPasswordError('Password Required.');
     } else if (password.length < 8) {
@@ -94,20 +60,10 @@ function NewPassword () {
     } else {
       setPasswordError('');
     }
-    // if (password !== reEnterPassword) {
-    //   setPasswordMatchError('Passwords do not match');
-    // } else {
-    //   setPasswordMatchError('');
-    // }
+    
   };
 
-  const onIconPasswordPress = () => {
-    setHidePassword(!hidePassword);
-  };
-
-  const onIconReEnterPasswordPress = () => {
-    setHidereEnterPassword(!hidereEnterPassword);
-  };
+  
 
   return (
     <KeyboardAvoidingView
@@ -121,73 +77,32 @@ function NewPassword () {
           <View style={styles.container}>
             <Text style={styles.nameText}>Reset password</Text>
             <Text style={styles.text}>Enter a new password for your account.</Text>
-            <TextInput
-              onChangeText={password => setPassword(password)}
-              secureTextEntry={hidePassword}
-              maxLength={15}
-              label='New password'
-              value={password}
-              underlineColor={argonTheme.COLORS.BUTTONDEFAULT}
-              style={styles.TextInputStylePassword}
-              right={showPassword
-                ? <TextInput.Icon
-                    color='#798286'
-                    style={{ justifyContent: 'flex-end' }}
-                    name='eye'
-                    forceTextInputFocus={false}
-                    onPress={() => onIconPasswordPress()}
-                  />
-                : null}
-              theme={{
-                colors: {
-                  primary: argonTheme.COLORS.TEXT,
-                  placeholder: argonTheme.COLORS.TEXT
-                }
-              }}
-            />
+
+            <TextInputPasswordComp   
+                value={password}
+                onChangeText={password => setPassword(password)}  
+                label='Password' 
+                />
+            
             <Text style={styles.passwordDetailText}>Password should have at least 8 characters and 1 special character.</Text>
-            <TextInput
-              onChangeText={reEnterPassword => setReEnterPassword(reEnterPassword)}
-              value={reEnterPassword}
-              secureTextEntry={hidereEnterPassword}
-              underlineColor={argonTheme.COLORS.BUTTONDEFAULT}
-              label='Re-enter password'
-              style={styles.TextInputStylePassword}
-              right={showRePassword
-                ? <TextInput.Icon
-                    color='#798286'
-                    name='eye'
-                    forceTextInputFocus={false}
-                    onPress={() => onIconReEnterPasswordPress()}
-                  />
-                : null}
-              theme={{
-                colors: {
-                  primary: argonTheme.COLORS.TEXT,
-                  placeholder: argonTheme.COLORS.TEXT
-                }
-              }}
-            />
+
+            <TextInputPasswordComp  
+              value={reEnterPassword}  
+              onChangeText={reEnterPassword => setReEnterPassword(reEnterPassword)} 
+              label='Re-enter password' 
+              />
+
           </View>
           <View style={styles.returnButtonContainer}>
-            <Button
-              mode='contained'
-              color={disabled ? '#f0a39d' : argonTheme.COLORS.BUTTONFILLED}
-              style={styles.SendEmailButton}
-              contentStyle={styles.ContentStyle}
-              labelStyle={{ fontFamily: 'Inter-Regular' }}
-              uppercase={false}
-              onPress={() => onSavePasswordPress()}
-            >
-              <Text
-                size={15}
-                color={argonTheme.COLORS.WHITE}
-                fontFamily='Inter-Bold'
-                bold
-              >
-                Save Password
-              </Text>
-            </Button>
+
+          <ButtonComp
+              value={disabled} 
+              onPress={() => onSavePasswordPress()} 
+              title="Save Password"
+              />
+
+
+            
           </View>
         </View>
       </TouchableWithoutFeedback>

@@ -3,9 +3,10 @@ import { StyleSheet, Dimensions, View, TouchableWithoutFeedback, Keyboard } from
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
+import ButtonComp from '../../Components/Button';
 import {
   validatePasscode
-  // userApplicationStatus
+ 
 } from '../../../apis/Authenticate';
 import { Text } from 'galio-framework';
 
@@ -31,15 +32,14 @@ function Passcode () {
     passcode: passcode,
     email: 'user@email.com'
   };
-    console.log('inside onPasscodeClick');
+    
     try {
       const status = await validatePasscode(data);
       console.log('----------status', status);
     } catch (error) {
       console.log('----------error', error);
     }
-    // const status = await validatePasscode(data);
-    // console.log('----------status', status);
+    
     if (passcode.length < 6) {
       setPasscodeError('The passcode you entered is not valid. Please try again.');
     } else {
@@ -47,14 +47,10 @@ function Passcode () {
     }
     if (passcode.length >= 6) {
       navigation.navigate('RegistrationScreen');
-    } else {
-      console.log('-----valid:false-------');
     }
   };
 
-  useEffect(() => {
-    console.log('buttonDisable', buttonDisable);
-  }, [buttonDisable]);
+  
 
   return (
     <DismissKeyboard>
@@ -72,6 +68,7 @@ function Passcode () {
         >
           Enter the passcode that was sent to your phone.
         </Text>
+
         <OTPInputView
           style={{ width: '100%', height: 100 }}
           pinCount={6}
@@ -92,25 +89,14 @@ function Passcode () {
             console.log('code', code);
           })}
         />
-        <Button
-          mode='contained'
-          color={buttonDisable ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED}
-          disabled={buttonDisable}
-          style={styles.createButtonContinue}
-          contentStyle={styles.ContentStyle}
-          labelStyle={{ fontFamily: 'Inter-Regular' }}
-          uppercase={false}
-          onPress={() => onPasscodeClick()}
-        >
-          <Text
-            size={15}
-            bold
-            fontFamily='Inter-Bold'
-            color={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
-          >
-            Continue
-          </Text>
-        </Button>
+
+
+    <ButtonComp
+          value={buttonDisable} 
+          onPress={() => onPasscodeClick()} 
+          title="Continue"
+          />
+      
       </View>
     </DismissKeyboard>
   );

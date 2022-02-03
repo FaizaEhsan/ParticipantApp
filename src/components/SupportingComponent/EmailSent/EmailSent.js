@@ -7,7 +7,7 @@ import { argonTheme } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
 import { useSelector } from 'react-redux';
-
+import ButtonComp from '../../Components/Button';
 const { height } = Dimensions.get('screen');
 
 function EmailSent () {
@@ -40,24 +40,13 @@ function EmailSent () {
         </View>
       </View>
       <View style={styles.returnButtonContainer}>
-        <Button
-          mode='contained'
-          color={argonTheme.COLORS.BUTTONDEFAULT}
-          style={styles.SendEmailButton}
-          contentStyle={styles.ContentStyle}
-          labelStyle={{ fontFamily: 'Inter-Regular' }}
-          uppercase={false}
-          onPress={() => onSendEmail()}
-        >
-          <Text
-            bold
-            size={15}
-            color={argonTheme.COLORS.BLACK}
-            fontFamily='Inter-Bold'
-          >
-            Return to Login
-          </Text>
-        </Button>
+
+      <ButtonComp
+          value={false} 
+          onPress={() => onSendEmail()} 
+          title="Return to Login"
+          />
+       
       </View>
     </View>
   );

@@ -4,6 +4,8 @@ import { Text, Checkbox } from 'galio-framework';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
 import { argonTheme } from '../../../constants';
+import ButtonComp from '../../Components/Button';
+import CheckBoxComp from '../../Components/CheckBox';
 // import { userApplicationStatus } from '../../../apis/Authenticate';
 const { width, height } = Dimensions.get('screen');
 
@@ -16,10 +18,9 @@ function Login () {
   }, [buttonDisable]);
 
   const onAcceptClick = () => {
-    console.log('-----------onAcceptClick-----------');
-    // updateEulaResponse(userInfoState);
+  
     SetEulaStatus(false);
-    // navigation.navigate('Menu', { screen: 'Dashboard' });
+    
   };
 
   return (
@@ -31,38 +32,21 @@ function Login () {
         <Text style={styles.modalText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut pharetra sit amet aliquam id diam. Urna duis convallis convallis tellus id interdum. Auctor elit sed vulputate mi sit amet mauris commodo. Habitasse platea dictumst quisque sagittis. Duis ultricies lacus sed turpis tincidunt. Porta lorem mollis aliquam ut porttitor. Felis bibendum ut tristique et. Tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Habitant morbi tristique senectus et netus et malesuada. Semper risus in hendrerit gravida rutrum quisque non tellus. Nulla malesuada pellentesque elit eget. Sollicitudin tempor id eu nisl. Mauris in aliquam sem fringilla ut morbi tincidunt augue. Arcu dictum varius duis at consectetur lorem. Tempus urna et pharetra pharetra. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Orci sagittis eu volutpat odio facilisis mauris sit. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Sit amet venenatis urna cursus eget nunc scelerisque viverra mauris. Nisl purus in mollis nunc sed id. Posuere ac ut consequat semper viverra nam libero justo. Ante in nibh mauris cursus mattis molestie a iaculis. Faucibus a pellentesque sit amet porttitor eget dolor morbi non. Eget velit aliquet sagittis id. Congue nisi vitae suscipit tellus mauris. Maecenas ultricies mi eget mauris pharetra et ultrices. A diam sollicitudin tempor id eu. Porttitor eget dolor morbi non arcu risus quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut pharetra sit amet aliquam id diam. Urna duis convallis convallis tellus id interdum. Auctor elit sed vulputate mi sit amet mauris commodo. Habitasse platea dictumst quisque sagittis. Duis ultricies lacus sed turpis tincidunt. Porta lorem mollis aliquam ut porttitor. Felis bibendum ut tristique et. Tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Habitant morbi tristique senectus et netus et malesuada. Semper risus in hendrerit gravida rutrum quisque non tellus. Nulla malesuada pellentesque elit eget. Sollicitudin tempor id eu nisl. Mauris in aliquam sem fringilla ut morbi tincidunt augue. Arcu dictum varius duis at consectetur lorem. Tempus urna et pharetra pharetra. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Orci sagittis eu volutpat odio facilisis mauris sit. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Sit amet venenatis urna cursus eget nunc scelerisque viverra mauris. Nisl purus in mollis nunc sed id. Posuere ac ut consequat semper viverra nam libero justo. Ante in nibh mauris cursus mattis molestie a iaculis. Faucibus a pellentesque sit amet porttitor eget dolor morbi non. Eget velit aliquet sagittis id. Congue nisi vitae suscipit tellus mauris. Maecenas ultricies mi eget mauris pharetra et ultrices. A diam sollicitudin tempor id eu. Porttitor eget dolor morbi non arcu risus quis.
         </Text>
       </ScrollView>
-      <Checkbox
-        checkboxStyle={{
-          borderWidth: buttonDisable ? 2 : 0
-        }}
-        color={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.CHECKBOXCOLOR}
-        labelStyle={{
-          fontFamily: 'Inter-Regular',
-          color: argonTheme.COLORS.TEXT,
-          fontSize: 14
-        }}
-        label='Accept privacy policy'
-        onChange={() => setButtonDisable(!buttonDisable)}
-      />
-      <Button
-        style={styles.createButtonPrivacy}
-        onPress={() => onAcceptClick()}
-        mode='contained'
-        color={argonTheme.COLORS.BUTTONDEFAULT}
-        disabled={buttonDisable}
-        contentStyle={styles.ContentStyle}
-        labelStyle={{ fontFamily: 'Inter-Regular' }}
-        uppercase={false}
-      >
-        <Text
-          size={15}
-          fontFamily='Inter-Regular'
-          bold
-          color={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.BLACK}
-        >
-          Continue
-        </Text>
-      </Button>
+
+      <CheckBoxComp 
+                  value={buttonDisable} 
+                  label='Accept privacy policy'
+                  onChange={() => setButtonDisable(!buttonDisable)}
+                  
+                  />
+
+      <ButtonComp
+          value={buttonDisable} 
+          onPress={() => onAcceptClick()} 
+          title="Continue"
+          color={argonTheme.COLORS.BUTTONDEFAULT}
+          />
+     
     </View>
   );
 }

@@ -5,6 +5,7 @@ import Login from '../SupportingComponent/Login/Login';
 import { userApplicationStatus } from '../../apis/Authenticate';
 import { getUserApplicationStatus } from '../../redux/Actions/index';
 
+
 function LoginScreen () {
   const dispatch = useDispatch();
   const userApplicationStatusData = useSelector((state) => state.getUserApplicationStatus);

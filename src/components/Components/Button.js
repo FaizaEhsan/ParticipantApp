@@ -1,55 +1,90 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
-import { Button } from 'galio-framework';
-import argonTheme from '../../constants/Theme';
+import React ,{useState} from 'react';
+import { StyleSheet, View,Dimensions } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-class ArButton extends React.Component {
-  render () {
-    const { small, shadowless, children, color, style, fontSize, ...props } = this.props;
-    const colorStyle = color && argonTheme.COLORS[color.toUpperCase()];
+import { Text, Checkbox } from 'galio-framework';
+// import {COLORS, SIZES, FONTS} from '../../../constant'
+import { argonTheme } from '../../constants';
+import { TextInput,Button } from 'react-native-paper';
+const { width, height } = Dimensions.get('screen');
 
-    const buttonStyles = [
-      small && styles.smallButton,
-      color && { backgroundColor: colorStyle },
-      !shadowless && styles.shadow,
-      { ...style }
-    ];
+const ButtonComp = props => {
+    const { Focus, onFocus, onBlur, capitalize,onPress, iconNameLeft,title,iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
+    const [buttonDisable, setButtonDisable] = useState(true);
 
+
+
+
+    
     return (
-      <Button
-        style={buttonStyles}
-        shadowless
-        textStyle={{ fontSize: fontSize || 12, fontWeight: '700' }}
-        {...props}
-      >
-        {children}
-      </Button>
-    );
-  }
+        <View style={styles.inputSize}>
+           <Button
+              mode='contained'
+              color={value ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED}
+              disabled={value}
+              style={styles.createButtonLogin}
+              contentStyle={styles.ContentStyle}
+              labelStyle={{ fontFamily: 'Inter-Regular' }}
+              uppercase={false}
+              value={value}
+              title={title}
+              onPress={onPress}
+              
+            >
+              <Text
+                size={15}
+                color={value ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
+              >
+                {title}
+              </Text>
+            </Button>
+        </View>
+    )
 }
 
-ArButton.propTypes = {
-  small: PropTypes.bool,
-  shadowless: PropTypes.bool,
-  color: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf(['default', 'error', 'CONFIRM', 'muted', 'primary', 'success', 'warning', 'chat'])
-  ])
-};
-
 const styles = StyleSheet.create({
-  smallButton: {
-    width: 75,
-    height: 28
-  },
-  shadow: {
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 4,
-    shadowOpacity: 0.1,
-    elevation: 2
-  }
+    inputSize: {
+        flexDirection: 'row'
+        // height: '10%'
+    },
+    txtInput: {
+        flex: 1,
+        marginTop: -13,
+        paddingLeft: 0,
+        fontSize: 16,
+        // color: COLORS.black,
+        fontFamily:'SourceSansPro-Regular'
+    },
+    TextInputStyleEmail: {
+        flex: 1,
+        marginBottom: '5%',
+        backgroundColor: '#fff',
+        fontFamily: 'Inter-Regular',
+        fontSize: 13,
+        borderBottomColor: argonTheme.COLORS.BUTTONDEFAULT
+      },
+      TextInputStyleEmailError: {
+        flex: 1,
+        marginBottom: '5%',
+        backgroundColor: '#fff',
+        fontFamily: 'Inter-Regular',
+        fontSize: 13,
+        borderBottomColor: argonTheme.COLORS.BUTTONFILLED
+      },
+
+      createButtonLogin: {
+        // width: width * 0.88,
+        // height: height * 0.06,
+        marginTop: '13%',
+        width:'100%'
+      },
+      ContentStyle: {
+        height: height * 0.06
+      },
 });
 
-export default ArButton;
+export default ButtonComp;

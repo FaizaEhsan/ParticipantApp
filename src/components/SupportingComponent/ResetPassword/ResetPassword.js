@@ -5,7 +5,8 @@ import { argonTheme } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { Button, TextInput } from 'react-native-paper';
 import { useSelector } from 'react-redux';
-
+import TextInputComp from '../../Components/TextInput';
+import ButtonComp from '../../Components/Button';
 const { height } = Dimensions.get('screen');
 
 function ResetPassword () {
@@ -43,38 +44,24 @@ function ResetPassword () {
           <View style={styles.container}>
             <Text style={styles.nameText}>Reset password</Text>
             <Text style={styles.text}>We'll send a link to your email to reset your password.</Text>
-            <TextInput
-              onChangeText={emailAddress => setEmailAddress(emailAddress)}
-              label='Email Address'
-              value={emailAddress}
-              underlineColor={argonTheme.COLORS.BUTTONDEFAULT}
-              style={styles.TextInputStylePassword}
-              theme={{
-                colors: {
-                  primary: argonTheme.COLORS.TEXT,
-                  placeholder: argonTheme.COLORS.TEXT
-                }
-              }}
-            />
+
+          <TextInputComp 
+                value={emailAddress}  
+                onChangeText={emailAddress => setEmailAddress(emailAddress)}  
+                label='Email' 
+                />
+
+           
           </View>
           <View style={styles.returnButtonContainer}>
-            <Button
-              mode='contained'
-              color={disabled ? '#f0a39d' : argonTheme.COLORS.BUTTONFILLED}
-              style={styles.SendEmailButton}
-              contentStyle={styles.ContentStyle}
-              labelStyle={{ fontFamily: 'Inter-Regular' }}
-              uppercase={false}
-              onPress={() => onSendEmail()}
-            >
-              <Text
-                size={15}
-                color={argonTheme.COLORS.WHITE}
-                fontFamily='Inter-Bold'
-              >
-                Send Email
-              </Text>
-            </Button>
+
+          <ButtonComp
+              value={disabled} 
+              onPress={() => onSendEmail()} 
+              title="Send Email"/>
+
+
+            
           </View>
         </View>
       </TouchableWithoutFeedback>

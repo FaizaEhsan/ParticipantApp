@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { StyleSheet, Dimensions, TouchableWithoutFeedback, Keyboard, View, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
 import { Text, Checkbox } from 'galio-framework';
 import { useNavigation } from '@react-navigation/native';
 import { PendoSDK } from 'rn-pendo-sdk';
+import TextInputComp from '../../Components/TextInput';
+import TextInputPasswordComp from '../../Components/TextInputPassword';
+import ButtonComp from '../../Components/Button';
+import CheckBoxComp from '../../Components/CheckBox';
 
 import { updateEulaResponse, enrollApp } from '../../../apis/Authenticate';
-// import { getUserApplicationStatus, setUserInfo } from '../../../redux/Actions/index';
 import { argonTheme } from '../../../constants';
 import Logo from '../Logo/Logo';
 const { width, height } = Dimensions.get('screen');
@@ -17,10 +19,7 @@ function Login () {
   const userApplicationStatusData = useSelector((state) => state.getUserApplicationStatus);
   const getRegisterUserData = useSelector((state) => state.registerUserData);
   const deviceToken = useSelector((state) => state.deviceToken.result);
-  // const userInfoData = useSelector((state) => state.setUserInfo);
-  // const dispatch = useDispatch();
   const [emailAddress, setEmailAddress] = useState('');
-  // const [activeEmailAddress, setActiveEmailAddress] = useState(false);
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const [CheckEmailAddress, setCheckEmailAddress] = useState('');
@@ -30,7 +29,6 @@ function Login () {
   const [eulaStatus, SetEulaStatus] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [checkBoxColor, setCheckBoxColor] = useState(true);
-  // const [userInfoState, setUserInfoState] = useState('');
   const [keyboardStatus, setKeyboardStatus] = useState(undefined);
 
   useEffect(() => {
@@ -64,11 +62,6 @@ function Login () {
   useEffect(() => {
   }, [emailAddress, deviceToken]);
 
-  // useEffect(() => {
-  //   if (Object.keys(userInfoData).length > 0) {
-  //     setUserInfoState(userInfoData);
-  //   }
-  // }, [userInfoData]);
 
   useEffect(() => {
     if (password !== '') {
@@ -87,9 +80,9 @@ function Login () {
   }, [emailAddress, password]);
 
   const onLoginClick = () => {
-    // if (deviceToken.length > 0 && emailAddress !== '' && password !== '') {
+   
     if (emailAddress !== '' && password !== '') {
-    // if (emailAddress === CheckEmailAddress && password === checkPassword) {
+   
       enrollApp(emailAddress, deviceToken);
       setError('');
       if (eulaStatus === true) {
@@ -105,14 +98,7 @@ function Login () {
         const visitorData = { Age: '25', Country: 'USA' };
         const accountData = { Tier: '1', Size: 'Enterprise' };
         PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
-      } else {
-        // const userInfo = {
-        //   userId: 'ID01234',
-        //   email: 'abc@gmail.com'
-        // };
-        // dispatch(setUserInfo(userInfo));
-        // navigation.navigate('Menu', { screen: 'Dashboard' });
-      }
+      } 
     } else {
       setError('Incorrect username or password');
     }
@@ -132,13 +118,7 @@ function Login () {
     navigation.navigate('ResetPasswordScreen');
   };
 
-  const onIconPress = () => {
-    setHidePassword(!hidePassword);
-  };
-
-  // const toggleActive = () => {
-  //   setActiveEmailAddress(true);
-  // };
+ 
 
   return (
     <KeyboardAvoidingView
@@ -155,87 +135,50 @@ function Login () {
             <View style={{ paddingTop: keyboardStatus === 'True' ? '2%' : '15%' }}>
               <Logo />
             </View>
+
             <Text
-              style={[styles.loginText, { marginTop: keyboardStatus === 'True' ? '5%' : '10%' }]}
-            >
+              style={[styles.loginText, { marginTop: keyboardStatus === 'True' ? '5%' : '10%' }]} >
               Log in
             </Text>
+
             <Text
-              style={[styles.enterText, { marginBottom: keyboardStatus === 'True' ? '5%' : '10%' }]}
-            >
+              style={[styles.enterText, { marginBottom: keyboardStatus === 'True' ? '5%' : '10%' }]}>
               Enter an email address and password to log in.
             </Text>
-            <TextInput
-              onChangeText={emailAddress => { setEmailAddress(emailAddress); }}
-              label='Email address'
-              value={emailAddress}
-              underlineColor={Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.BUTTONDEFAULT}
-              style={Error ? styles.TextInputStyleEmailError : styles.TextInputStyleEmail}
-              theme={{
-                colors: {
-                  primary: Error ? argonTheme.COLORS.BUTTONFILLED : 'black',
-                  placeholder: Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.TEXT
-                }
-              }}
-            />
-            <TextInput
-              onChangeText={password => setPassword(password)}
-              maxLength={15}
-              secureTextEntry={hidePassword}
-              label='Password'
-              value={password}
-              underlineColor={Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.BUTTONDEFAULT}
-              style={Error ? styles.TextInputStylePasswordError : styles.TextInputStylePassword}
-              right={showPassword
-                ? <TextInput.Icon
-                    color='#798286'
-                    name='eye'
-                    forceTextInputFocus={false}
-                    onPress={() => onIconPress()}
-                  />
-                : null}
-              theme={{
-                colors: {
-                  primary: Error ? argonTheme.COLORS.BUTTONFILLED : 'black',
-                  placeholder: Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.TEXT
-                }
-              }}
-            />
+
+            <TextInputComp 
+                value={emailAddress} 
+                Error={Error} 
+                onChangeText={emailAddress => setEmailAddress(emailAddress)}  
+                label='Email' 
+                />
+
+            <TextInputPasswordComp  
+              Error={Error} 
+                value={password} 
+                onChangeText={password => setPassword(password)}  
+                label='Password' 
+                />
+            
+           
             {!!Error && (
               <Text style={styles.errorText}>{Error}</Text>
             )}
+           
             <View>
-              <Checkbox
-                checkboxStyle={{
-                  borderWidth: checkBoxColor ? 2 : 0
-                }}
-                color={checkBoxColor ? argonTheme.COLORS.TEXT : argonTheme.COLORS.CHECKBOXCOLOR}
-                labelStyle={{
-                  color: argonTheme.COLORS.TEXT,
-                  fontSize: 13,
-                  fontFamily: 'Inter-Regular'
-                }}
-                label='Remember Me'
-                onChange={() => setCheckBoxColor(!checkBoxColor)}
-              />
+              <CheckBoxComp 
+                  value={checkBoxColor} 
+                  onChange={() => setCheckBoxColor(!checkBoxColor)}
+                  label='Remember Me'
+                  />
             </View>
-            <Button
-              mode='contained'
-              color={buttonDisable ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED}
-              disabled={buttonDisable}
-              style={styles.createButtonLogin}
-              contentStyle={styles.ContentStyle}
-              labelStyle={{ fontFamily: 'Inter-Regular' }}
-              uppercase={false}
-              onPress={() => onLoginClick()}
-            >
-              <Text
-                size={15}
-                color={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
-              >
-                Log In
-              </Text>
-            </Button>
+           
+            <ButtonComp
+                value={buttonDisable} 
+                onPress={() => onLoginClick()} title="Login"
+                />
+
+
             <TouchableOpacity
               onPress={() => onForgotPasswordPress()}
             >
