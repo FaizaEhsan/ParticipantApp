@@ -20,6 +20,7 @@ function Login () {
   const onAcceptClick = () => {
   
     SetEulaStatus(false);
+    navigation.navigate('Menu', { screen: 'Dashboard' });
     
   };
 
