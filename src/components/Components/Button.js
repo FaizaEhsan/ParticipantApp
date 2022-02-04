@@ -13,7 +13,7 @@ import { TextInput,Button } from 'react-native-paper';
 const { width, height } = Dimensions.get('screen');
 
 const ButtonComp = props => {
-    const { Focus, onFocus, onBlur, capitalize,onPress, iconNameLeft,title,iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
+    const { Focus, onFocus, onBlur, capitalize,onPress,color, txtColor, iconNameLeft,title,iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
     const [buttonDisable, setButtonDisable] = useState(true);
 
 
@@ -22,9 +22,10 @@ const ButtonComp = props => {
     
     return (
         <View style={styles.inputSize}>
-           <Button
+              <Button
               mode='contained'
-              color={value ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED}
+              color={color}
+              txtColor={txtColor}
               disabled={value}
               style={styles.createButtonLogin}
               contentStyle={styles.ContentStyle}
@@ -37,7 +38,7 @@ const ButtonComp = props => {
             >
               <Text
                 size={15}
-                color={value ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
+                color={txtColor}
               >
                 {title}
               </Text>

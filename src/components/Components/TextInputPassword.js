@@ -5,7 +5,7 @@ import { argonTheme } from '../../constants';
 import { TextInput } from 'react-native-paper';
 
 const TextInputPasswordComp = props => {
-    const { Focus, onFocus, onBlur,capitalize, iconNameLeft, iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
+    const { Focus, onFocus, onBlur,capitalize,theme, iconNameLeft, iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
 
   
     
@@ -25,18 +25,13 @@ const TextInputPasswordComp = props => {
 
 
 <TextInput  
-                theme={{
-                colors: {
-                  primary: Error ? argonTheme.COLORS.BUTTONFILLED : 'black',
-                  placeholder: Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.TEXT
-                }
-                }}
+                  theme={theme}
                 maxLength={15}
-                
+                value={value}
                 underlineColor={Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.BUTTONDEFAULT}
                 style={Error ? styles.TextInputStylePasswordError : styles.TextInputStylePassword}
                 Error={Error}
-               right={showPassword
+               right={value != ''
                     ? <TextInput.Icon
                         color='#798286'
                         name='eye-outline' 
@@ -44,12 +39,7 @@ const TextInputPasswordComp = props => {
                         forceTextInputFocus={false}
                         onPress={onIconPress}
                       />
-                    :  <TextInput.Icon
-                    color='#798286'
-                    name='eye-off-outline'
-                    forceTextInputFocus={false}
-                    onPress={onIconPress}
-                  />}   
+                    : null}   
 
                    
 

@@ -146,11 +146,20 @@ function Login () {
               Enter an email address and password to log in.
             </Text>
 
+           
+
             <TextInputComp 
                 value={emailAddress} 
                 Error={Error} 
                 onChangeText={emailAddress => setEmailAddress(emailAddress)}  
-                label='Email' 
+                label='Email'
+                theme={{
+                  colors: {
+                    primary: Error ? argonTheme.COLORS.BUTTONFILLED : 'black',
+                    placeholder: Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.TEXT
+                  }
+                }}
+                 
                 />
 
             <TextInputPasswordComp  
@@ -158,6 +167,12 @@ function Login () {
                 value={password} 
                 onChangeText={password => setPassword(password)}  
                 label='Password' 
+                theme={{
+                  colors: {
+                    primary: Error ? argonTheme.COLORS.BUTTONFILLED : 'black',
+                    placeholder: Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.TEXT
+                  }
+                }}
                 />
             
            
@@ -166,16 +181,23 @@ function Login () {
             )}
            
             <View>
+
+            
               <CheckBoxComp 
                   value={checkBoxColor} 
                   onChange={() => setCheckBoxColor(!checkBoxColor)}
                   label='Remember Me'
                   />
             </View>
+
+
            
             <ButtonComp
-                value={buttonDisable} 
-                onPress={() => onLoginClick()} title="Login"
+                  color={buttonDisable ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED}
+                  txtColor={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
+                  onPress={() => onLoginClick()} 
+                  title="Login"
+                  disabled={buttonDisable}
                 />
 
 

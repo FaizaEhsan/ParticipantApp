@@ -18,6 +18,12 @@ function NewPassword () {
   const [showRePassword, setShowRePassword] = useState(false);
 
  
+ 
+ 
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordMatchError, setPasswordMatchError] = useState('');
+ 
 
   useEffect(() => {
     console.log('length', password.length)
@@ -80,26 +86,43 @@ function NewPassword () {
 
             <TextInputPasswordComp   
                 value={password}
+                Error={''}
                 onChangeText={password => setPassword(password)}  
                 label='Password' 
+                theme={{
+                  colors: {
+                    primary: argonTheme.COLORS.TEXT,
+                    placeholder: argonTheme.COLORS.TEXT
+                  }
+                }}
                 />
             
             <Text style={styles.passwordDetailText}>Password should have at least 8 characters and 1 special character.</Text>
 
             <TextInputPasswordComp  
-              value={reEnterPassword}  
+              value={reEnterPassword} 
+              Error={''} 
               onChangeText={reEnterPassword => setReEnterPassword(reEnterPassword)} 
               label='Re-enter password' 
+              theme={{
+                colors: {
+                  primary: argonTheme.COLORS.TEXT,
+                  placeholder: argonTheme.COLORS.TEXT
+                }
+              }}
               />
 
           </View>
           <View style={styles.returnButtonContainer}>
 
           <ButtonComp
-              value={disabled} 
+              color={disabled ? '#f0a39d' : argonTheme.COLORS.BUTTONFILLED}
+              txtColor={argonTheme.COLORS.WHITE}
               onPress={() => onSavePasswordPress()} 
               title="Save Password"
               />
+
+
 
 
             

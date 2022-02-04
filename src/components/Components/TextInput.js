@@ -10,16 +10,11 @@ import { argonTheme } from '../../constants';
 import { TextInput } from 'react-native-paper';
 
 const TextInputComp = props => {
-    const { Focus, onFocus, onBlur, capitalize, iconNameLeft, iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
+    const { Focus, onFocus, onBlur,theme, capitalize, iconNameLeft, iconNameRight, label, onChangeText, value, keyboardType, Error, textContentType, iconNameMaterial, Icon, asterisk } = props;
     return (
         <View style={styles.inputSize}>
             <TextInput  
-                theme={{
-                colors: {
-                  primary: Error ? argonTheme.COLORS.BUTTONFILLED : 'black',
-                  placeholder: Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.TEXT
-                }
-                }}
+                theme={theme}
                 maxLength={15}
                 underlineColor={Error ? argonTheme.COLORS.BUTTONFILLED : argonTheme.COLORS.BUTTONDEFAULT}
                 style={Error ? styles.TextInputStyleEmailError : styles.TextInputStyleEmail}   

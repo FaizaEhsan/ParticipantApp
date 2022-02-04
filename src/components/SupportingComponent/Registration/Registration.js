@@ -153,8 +153,8 @@ function Registration (prop) {
                 value={emailAddress}  
                 onChangeText={emailAddress => setEmailAddress(emailAddress)}  
                 label='Email' 
-                underlineColor={emailError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
-                style={emailError ? styles.TextInputStyleEmailWithError : styles.TextInputStyleEmail}
+               Error={emailError}
+                
                 theme={{
                   colors: {
                     primary: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
@@ -171,9 +171,16 @@ function Registration (prop) {
             <TextInputPasswordComp   
                 value={password} 
                 onChangeText={password => setPassword(password)}  
-                
-                underlineColor={passwordError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
+                Error={passwordError}
+             
                 label='Password' 
+                theme={{
+                  colors: {
+                    primary: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : 'black',
+                    placeholder: passwordError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.TEXT,
+                    underlineColor: 'transparent'
+                  }
+                }}
                 />
             
             {/* {!!passwordError && (
@@ -195,8 +202,8 @@ function Registration (prop) {
               value={reEnterPassword}  
               onChangeText={reEnterPassword => setReEnterPassword(reEnterPassword)} 
               label='Re-enter password' 
-              underlineColor={passwordMatchError ? argonTheme.COLORS.TEXTINPUTERROR : argonTheme.COLORS.BUTTONDEFAULT}
-              style={passwordMatchError ? styles.TextInputStylePasswordError : styles.TextInputStylePassword}
+              Error={passwordMatchError}
+             
               />
            
             {!!passwordMatchError && (
@@ -205,11 +212,17 @@ function Registration (prop) {
 
 
 
+
               <ButtonComp
-                value={buttonDisable} 
+                color={buttonDisable ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED} 
+                txtColor={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
+                disabled={buttonDisable}
                 onPress={() => onRegisterClick()} title="Create Account"
                 style={{ marginTop: keyboardStatus === 'True' ? '5%' : '10%' }}
                 />
+
+
+
             
           </View>
         </ScrollView>

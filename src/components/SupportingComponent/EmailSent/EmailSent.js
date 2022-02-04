@@ -41,10 +41,13 @@ function EmailSent () {
       </View>
       <View style={styles.returnButtonContainer}>
 
+
       <ButtonComp
-          value={false} 
-          onPress={() => onSendEmail()} 
-          title="Return to Login"
+
+        color={argonTheme.COLORS.BUTTONDEFAULT}
+        txtColor={argonTheme.COLORS.BLACK}
+        onPress={() => onSendEmail()} 
+        title="Return to Login"
           />
        
       </View>

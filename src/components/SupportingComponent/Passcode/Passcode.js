@@ -92,10 +92,14 @@ function Passcode () {
 
 
     <ButtonComp
-          value={buttonDisable} 
+         color={buttonDisable ? argonTheme.COLORS.BUTTONDEFAULT : argonTheme.COLORS.BUTTONFILLED} 
+         disabled={buttonDisable}
           onPress={() => onPasscodeClick()} 
+          txtColor={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.WHITE}
           title="Continue"
           />
+
+
       
       </View>
     </DismissKeyboard>

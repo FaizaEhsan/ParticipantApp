@@ -40,12 +40,17 @@ function Login () {
                   
                   />
 
+
+                
       <ButtonComp
-          value={buttonDisable} 
+      txtColor={buttonDisable ? argonTheme.COLORS.TEXT : argonTheme.COLORS.BLACK}
+          disabled={buttonDisable}
           onPress={() => onAcceptClick()} 
           title="Continue"
           color={argonTheme.COLORS.BUTTONDEFAULT}
           />
+
+         
      
     </View>
   );

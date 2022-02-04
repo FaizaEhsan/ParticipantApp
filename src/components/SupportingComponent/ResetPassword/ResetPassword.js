@@ -47,18 +47,36 @@ function ResetPassword () {
 
           <TextInputComp 
                 value={emailAddress}  
+                Error={''}
                 onChangeText={emailAddress => setEmailAddress(emailAddress)}  
                 label='Email' 
+                theme={{
+                  colors: {
+                    primary: argonTheme.COLORS.TEXT,
+                    placeholder: argonTheme.COLORS.TEXT
+                  }
+                }}
                 />
 
            
           </View>
           <View style={styles.returnButtonContainer}>
 
+
+
+
+          
+
           <ButtonComp
-              value={disabled} 
+           color={disabled ? '#f0a39d' : argonTheme.COLORS.BUTTONFILLED}
+           txtColor={argonTheme.COLORS.WHITE}
               onPress={() => onSendEmail()} 
               title="Send Email"/>
+
+
+
+
+      
 
 
             
